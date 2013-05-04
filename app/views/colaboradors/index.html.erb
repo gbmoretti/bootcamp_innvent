@@ -1,0 +1,27 @@
+<h1>Listing colaboradors</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Matricula</th>
+    <th>Cargo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @colaboradors.each do |colaborador| %>
+  <tr>
+    <td><%= colaborador.nome %></td>
+    <td><%= colaborador.matricula %></td>
+    <td><%= colaborador.cargo %></td>
+    <td><%= link_to 'Show', colaborador %></td>
+    <td><%= link_to 'Edit', edit_colaborador_path(colaborador) %></td>
+    <td><%= link_to 'Destroy', colaborador, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Colaborador', new_colaborador_path %>
