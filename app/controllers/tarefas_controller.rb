@@ -1,16 +1,18 @@
 # encoding: UTF-8
 class TarefasController < ApplicationController
 
-  def new
+  def new    
     @tarefa = Tarefa.new
-    render 'novo'
+    render 'novo', :layout => "modal"
   end
 
   def create
+    projeto = Projeto.find params[:projeto_id]
     @tarefa = Tarefa.new params[:tarefa]
+    @tarefa.projeto = projeto
     if !@tarefa.save
       flash[:error] = "Existem erros que impedem a inclusão"
-      render :novo
+      render :novo, :status => :unprocessable_entity
     else
       redirect_to :action => :index, notice: "Tarefa #{params[:id]} criada com sucesso"
     end
@@ -35,6 +37,12 @@ class TarefasController < ApplicationController
       flash[:error] = "Existem erros que impedem a atualizacao"
       render :action => :edit
     end
+  end
+
+  def concluir
+    tarefa = Tarefa.find(params[:tarefa_id])
+    tarefa.concluir!
+    redirect_to :action => :index
   end
 
   def destroy

@@ -37,26 +37,27 @@ describe Tarefa do
   
   context "Persistencia" do
     subject{ Tarefa.new }
+    let (:projeto) { Projeto.new({:nome => "Projeto", :data_inicio => DateTime.new, :data_entrega => DateTime.new, :responsavel => "oioi"}) }
     it "deve gravar uma nova tarefa no banco" do
       subject.descricao = "Tarefa 1"
       subject.responsavel = "Joao"
-      subject.projeto = "curso"
+      subject.projeto = projeto
       subject.id.should be_nil
       subject.created_at.should be_nil
-      subject.save
+      subject.save!
       subject.id.should == 1
       subject.created_at.should_not be_nil
     end
     
-    it "deve ser possivel criar um novo registro no banco passando os parametros via hash" do
-      nova_tarefa = Tarefa.new :descricao => 'Teste', :responsavel => 'Mario', :projeto => 'curso'
-      nova_tarefa.save.should be_true
+    it "deve ser possivel criar um novo registro no banco passando os parametros via hash" do      
+      nova_tarefa = Tarefa.new :descricao => 'Teste', :responsavel => 'Mario', :projeto => projeto
+      nova_tarefa.save!.should be_true
       nova_tarefa.id.should_not be_nil
       nova_tarefa.descricao.should == "Teste"
     end
 
-    it "deve ser possivel criar um novo registro no banco sem chamar o save" do
-      nova_tarefa = Tarefa.create :descricao => 'Teste', :responsavel => 'Mario', :projeto => 'curso'
+    it "deve ser possivel criar um novo registro no banco sem chamar o save" do     
+      nova_tarefa = Tarefa.create :descricao => 'Teste', :responsavel => 'Mario', :projeto => projeto
       nova_tarefa.id.should_not be_nil
       nova_tarefa.descricao.should == "Teste"
       nova_tarefa.descricao = "Novo"
@@ -65,10 +66,10 @@ describe Tarefa do
     end
 
     it "deve ser possível concluir uma tarefa" do
-      tarefa = Tarefa.new(:descricao => "Teste")
+      tarefa = Tarefa.new(:descricao => "Teste", :projeto => projeto)
       tarefa.concluir!
       tarefa.concluida?.should be_true
-      tarefa.data_conclusao.should_not be_nil
+      tarefa.data_finalizacao.should_not be_nil
     end
   end
 end
