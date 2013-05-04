@@ -1,4 +1,14 @@
-<h3> Nova Tarefa </h3>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="myModalLabel">Nova tarefa</h3>
+</div>
+<div class="modal-body">
+  <%= render :partial => 'form', :locals => {:tarefa => @tarefa} %>
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+  <button class="btn btn-primary" id="salvar">Salvar</button>
+</div>
 
-<%= render :partial => 'shared/mensagem_erro', :object => @tarefa %>
-<%= render :partial => 'form', :locals => {:tarefa => @tarefa} %>
+
+

@@ -5,6 +5,7 @@
   <tr>
     <th>Nome</th>
     <th>Responsavel</th>
+    <th>Data de Inicio</th>
     <th>Data de Entrega</th>	  
     <th></th>
     <th></th>
@@ -16,6 +17,7 @@
   <tr>
 	<td><%=projeto.nome%></td>
 	<td><%=projeto.responsavel%></td>
+	<td><%=projeto.data_inicio%></td>
 	<td><%=projeto.data_entrega%></td>
     <td><%= link_to 'Altera', edit_projeto_path(projeto) %></td>
     <td><%= link_to 'Remove', projeto,

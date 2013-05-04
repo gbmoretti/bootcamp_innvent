@@ -4,4 +4,4 @@
 	<%= render :partial => 'lista_tarefa', :object => @tarefas %>
 </div>
 
-<%= link_to 'Nova Tarefa', new_projeto_tarefa_path(@projeto), :id => 'cria_nova_tarefa' %>
+<a id="nova-tarefa" href="#myModal" role="button" class="btn" data-toggle="modal" data-url="<%= new_projeto_tarefa_path(@projeto) %>">Nova tarefa</a>
